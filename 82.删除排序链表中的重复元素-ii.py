@@ -12,18 +12,33 @@
 #         self.next = next
 class Solution:
     def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        dummy=ListNode(-1)
-        dummy.next=head
-        cur=dummy
+        # dummy=ListNode(-1)
+        # dummy.next=head
+        # cur=dummy
 
-        while cur.next and cur.next.next:
-            if cur.next.val==cur.next.next.val:
-                value=cur.next.val
-                while cur.next and cur.next.val==value:
-                    cur.next=cur.next.next
-            else:
-                cur=cur.next
-        return dummy.next
+        # while cur.next and cur.next.next:
+        #     if cur.next.val==cur.next.next.val:
+        #         value=cur.next.val
+        #         while cur.next and cur.next.val==value:
+        #             cur.next=cur.next.next
+        #     else:
+        #         cur=cur.next
+        # return dummy.next
+
+        if head==None or head.next==None:
+            return head
+        
+        if head.val!=head.next.val:
+            resNode=self.deleteDuplicates(head.next) # 套娃，返回已经处理完的下一个头
+            head.next=resNode
+            return head
+        else:
+            newNode=head.next # 当前会和后面一样，所以删了
+            # 然后一直找，直到找到不一样的了
+            while newNode!=None and head.val==newNode.val:
+                newNode=newNode.next
+        return self.deleteDuplicates(newNode)
+
 '''
 class Solution:
     def deleteDuplicates(self, head: ListNode) -> ListNode:
@@ -63,6 +78,54 @@ class Solution:
 
         # 最终返回虚拟头节点的下一个节点就行了
         return dummy.next
+
+法二
+# 登录 AlgoMooc 官网获取更多算法图解
+# https://www.algomooc.com
+# 作者：程序员吴师兄
+# 代码有看不懂的地方一定要私聊咨询吴师兄呀
+# https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list-ii/submissions/
+class Solution:
+    def deleteDuplicates(self, head: ListNode) -> ListNode:
+        # 递归终止条件
+        if head == None or head.next == None:
+            return head
+        
+
+        # 在访问过程中，会出现两种情况
+        # 1、如果访问的节点值和下一个节点值不相同
+        if head.val != head.next.val:
+
+            # 那么说明当前访问的节点 head 需要保留下来，它和后面经过删除操作的链表连接起来
+
+            # a、利用递归，获取后续删除了链表重复元素的链表
+            resNode = self.deleteDuplicates(head.next)
+
+            # 将 head 和后续已经删除了重复元素的链表连接起来
+            head.next = resNode
+
+            # 返回这个结果就行
+            return head
+
+        # 2、如果访问的节点值和下一个节点值相同
+        else:
+
+            # 那说明 head 这个节点就不应该留下来
+
+            # 现在的目的就是去找出和 head 这个节点值不一样的节点来
+            newNode = head.next
+
+            # 利用 while 循环，找出和 head 这个节点值不一样的节点来
+            while newNode != None and head.val == newNode.val:
+                newNode = newNode.next
+            
+
+            # 此时，经过 while 循环后，newNode 指向了一个不等于 head 的节点
+            # 递归调用 deleteDuplicates 函数，处理后面的所有节点
+            # 处理好后
+            # 1、要么是直接是最终的结果
+            # 2、要么是这个结果链表会连接在某个节点后面，比如上述的 a 操作这行代码
+            return self.deleteDuplicates(newNode)
 '''
 # @lc code=end
 

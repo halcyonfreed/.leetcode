@@ -5,20 +5,25 @@
 #
 
 # @lc code=start
-class Solution:
-    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
-        # 先锁定哪一行，用第一列，left，right是头和尾
-        j,i=0,len(matrix)-1
+# class Solution:
+#     def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+#         # 先锁定哪一行，用第一列，left，right是头和尾
+#         j,i=0,len(matrix)-1
 
-        while i>=0 and j<len(matrix[0]):
-            if matrix[i][j]>target:
-                # 大了
-                i-=1
-            elif matrix[i][j]<target:
-                j+=1
-            else:
-                return True
-        return False
+#         while i>=0 and j<len(matrix[0]):
+#             if matrix[i][j]>target:
+#                 # 大了
+#                 i-=1
+#             elif matrix[i][j]<target:
+#                 j+=1
+#             else:
+#                 return True
+#         return False
+
+class Solution:
+    def searchMatrix(self,matrix:List[int],target:int)-)
+
+
 
 '''
 登录 AlgoMooc 官网获取更多算法图解

@@ -5,18 +5,57 @@
 #
 
 # @lc code=start
+# class Solution:
+#     def minSubArrayLen(self, target: int, nums: List[int]) -> int:
+        # left,sum=0,0
+        # result=len(nums)+1
+        # for right in range(len(nums)):
+        #     sum+=nums[right]
+        #     while sum>=target:
+        #         result=min(result,right-left+1)
+                
+        #         sum-=nums[left]
+        #         left+=1
+        # return 0 if result==len(nums)+1 else result
+        
+        # left=0
+        # sum=0
+        # result=len(nums)+1 #  初值设最大即可！！
+
+        # for right in range(len(nums)):
+        #     sum+=nums[right]
+
+        #     # 一直向右，直到sum>=target 才动起始的left
+        #     while sum>=target:
+        #         result=min(result,right-left+1)
+
+        #         sum-=nums[left]
+        #         left+=1
+        # return 0 if result==len(nums)+1 else result
+
 class Solution:
-    def minSubArrayLen(self, target: int, nums: List[int]) -> int:
-        left,sum=0,0
+    def minSubArray(self,target:int,nums:list[int])->int:
+        # left,sum,right=0,0,0
+        # result=len(nums)+1
+        # # 因为不知道多少次，所以用while!!
+        
+
+        left,right,sum=0,0,0
         result=len(nums)+1
-        for right in range(len(nums)):
+        while right<len(nums):
+            # right用来求和！！！
             sum+=nums[right]
             while sum>=target:
                 result=min(result,right-left+1)
-                
+
                 sum-=nums[left]
                 left+=1
+
+            right+=1
         return 0 if result==len(nums)+1 else result
+
+
+
 
 '''
 class Solution:

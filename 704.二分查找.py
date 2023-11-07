@@ -5,20 +5,75 @@
 #
 
 # @lc code=start
-class Solution:
-    def search(self, nums: List[int], target: int) -> int:
-        left,right=0,len(nums)-1
+# class Solution:
+#     def search(self, nums: List[int], target: int) -> int:
+#         left,right=0,len(nums)-1
 
-        while left<=right:
-            # 也可以=不是<是<=
-            mid=left+(right-left)//2
-            if nums[mid]==target:
-                return mid
-            elif nums[mid]<target:
-                left=mid+1
-            else:
-                right=mid-1
-        return -1
+#         while left<=right:
+#             # 也可以=不是<是<=
+#             mid=left+(right-left)//2
+#             if nums[mid]==target:
+#                 return mid
+#             elif nums[mid]<target:
+#                 left=mid+1
+#             else:
+#                 right=mid-1
+#         return -1
+
+# 左闭右闭
+# class Solution:
+#     def search(self,nums:List[int],target:int)->int:
+#         left,right=0,len(nums)-1
+#         while(left<=right):
+#             middle=(left+right)//2
+#             if nums[middle]>target:
+#                 right=middle-1
+#             elif nums[middle]<target:
+#                 left=middle+1
+#             else:
+#                 return middle
+#         return -1
+
+# 左闭右开
+# class Solution:
+#     def search(self,nums:List[int],target:int)->int:
+#         # left,right=0,len(nums)-1 左闭右开初始值也要改，因为右边界不包括，所以right=len(nums)
+#         left,right=0,len(nums)
+#         while(left<right):
+#             mid=(left+right)//2
+#             if nums[mid]<target:
+#                 left=mid+1
+#             elif nums[mid]>target:
+#                 right=mid
+#             else:
+#                 return mid
+#         return -1
+
+# class Solution:
+#     def search(self,nums:List[int],target:int)->int:
+#         # []
+#         # left,right=0,len(nums)-1
+#         # while left<=right:
+#         #     middle=left+(right-left)//2
+#         #     if nums[middle]>target:
+#         #         right=middle-1
+#         #     elif nums[middle]<target:
+#         #         left=middle+1
+#         #     else:
+#         #         return middle
+#         # return -1
+
+#         # [)
+#         left,right=0,len(nums)
+#         while left<right:
+#             middle=left+(right-left)//2
+#             if nums[middle]>target:
+#                 right=middle
+#             elif nums[middle]<target:
+#                 left=middle+1
+#             else:
+#                 return middle
+#         return -1
 
 '''
 # 登录 AlgoMooc 官网获取更多算法图解
@@ -80,5 +135,59 @@ class Solution:
         # 查找完区间中的所有元素都没有找到，返回 -1
         return -1
 '''
+
+# class Solution:
+#     def search(self,nums:List[int],target:int)->int:
+#         # 左闭右开
+#         left=0
+#         right=len(nums) # 初值会错
+#         while left<right:
+#             mid=left+(right-left)//2
+#             if target>nums[mid]:
+#                 left=mid+1
+#             elif nums[mid]>target:
+#                 right=mid
+#             else:
+#                 return mid
+#         return -1
+
+class Solution:
+    def search(self,nums:list[int],target:int)->int:
+        # left=0
+        # right=len(nums)
+        # while left<right:
+        #     mid=left+(right-left)//2
+        #     if target>nums[mid]:
+        #         left=mid+1
+        #     elif target<nums[mid]:
+        #         right=mid
+        #     else:
+        #         return mid
+        # return -1
+
+        # left=0
+        # right=len(nums)-1
+        # while left<=right:
+        #     mid=left+(right-left)//2
+        #     if nums[mid]>target:
+        #         right=mid-1
+        #     elif nums[mid]<target:
+        #         left=mid+1
+        #     else:
+        #         return mid
+        # return -1
+
+        left=0
+        right=len(nums)
+        while left<right:
+            mid=left+(right-left)//2
+            if nums[mid]==target:
+                return mid
+            elif nums[mid]<target:
+                left=mid+1
+            else:
+                right=mid
+        return -1
+
 # @lc code=end
 

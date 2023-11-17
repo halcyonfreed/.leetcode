@@ -34,28 +34,32 @@
         # return 0 if result==len(nums)+1 else result
 
 class Solution:
-    def minSubArray(self,target:int,nums:list[int])->int:
-        # left,sum,right=0,0,0
-        # result=len(nums)+1
-        # # 因为不知道多少次，所以用while!!
-        
+    def minSubArrayLen(self,target:int,nums:list[int])->int:
+        # # left,sum,right=0,0,0
+        # # result=len(nums)+1
+        # # # 因为不知道多少次，所以用while!!
+        # left,right,sum=0,0,0
+        # length=len(nums)+1
 
-        left,right,sum=0,0,0
+        # # for与while叠加，次数确定用for，次数不定用while
+        # for right in range(len(nums)):
+        #     sum+=nums[right]
+        #     while sum>=target:
+        #         length=min(length,right-left+1)
+        #         sum-=nums[left]
+        #         left+=1
+        # return length if length!=len(nums)+1 else 0
+        l,r,sum=0,0,0
         result=len(nums)+1
-        while right<len(nums):
-            # right用来求和！！！
-            sum+=nums[right]
+
+        for r in range(len(nums)):
+            sum+=nums[r]
             while sum>=target:
-                result=min(result,right-left+1)
-
-                sum-=nums[left]
-                left+=1
-
-            right+=1
-        return 0 if result==len(nums)+1 else result
-
-
-
+                result=min(result,r-l+1)
+                
+                sum-=nums[l]
+                l+=1
+        return result if result!=len(nums)+1 else 0
 
 '''
 class Solution:

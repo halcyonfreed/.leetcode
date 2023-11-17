@@ -22,17 +22,20 @@ class Solution:
             
         # return result
 
-        l,r,k=0,len(nums)-1,len(nums)-1
         result=[0]*len(nums)
+        l,r,k=0,len(nums)-1,len(nums)-1
+
+        # 左闭右开,不行；越界nums[r]
         while l<=r:
-            if nums[l]*nums[l]>=nums[r]*nums[r]:
-                result[k]=nums[l]*nums[l]    
+            if nums[l]*nums[l]>nums[r]*nums[r]:
+                result[k]=nums[l]*nums[l]
                 l+=1
             else:
                 result[k]=nums[r]*nums[r]
                 r-=1
             k-=1
         return result
+
                 
 # @lc code=end
 

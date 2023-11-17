@@ -176,18 +176,33 @@ class Solution:
         #     else:
         #         return mid
         # return -1
+        
+        # # 左闭右开
+        # left=0
+        # right=len(nums)
+        # while left<right:
+        #     mid=left+(right-left)//2
+        #     if nums[mid]<target:
+        #         left=mid+1
+        #     elif nums[mid]>target:
+        #         right=mid
+        #     else:
+        #         return mid
+        # return -1
 
+        # 左闭右闭
         left=0
-        right=len(nums)
-        while left<right:
+        right=len(nums)-1
+        while left<=right:
             mid=left+(right-left)//2
             if nums[mid]==target:
                 return mid
             elif nums[mid]<target:
                 left=mid+1
             else:
-                right=mid
+                right=mid-1
         return -1
+
 
 # @lc code=end
 

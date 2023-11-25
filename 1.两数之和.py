@@ -7,14 +7,35 @@
 # @lc code=start
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
-        map=dict()
-        for i,num in enumerate(nums):
-            anotherNum=target-num
-            if anotherNum in map:
-                return [map[target-num],i]
-            else:
-                map[nums[i]]=i
+        record_hash={}
+        # record_hash=dict()
+
+        # hap map
+        for index, num in enumerate(nums):
+            # 也要存下标index 作为value； num作为key 被查询对象
+            other=target-num 
+            if other in record_hash:
+                # 在dict 查找key
+                return [index,record_hash[other]]
+            record_hash[num]=index
+            # 也下面两行可以这么写
+            # else: 
+            #     record_hash[num]=index
         return []
+
+
+'''
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        records = dict()
+
+        for index, value in enumerate(nums):  
+            if target - value in records:   # 遍历当前元素，并在map中寻找是否有匹配的key
+                return [records[target- value], index]
+            records[value] = index    # 如果没找到匹配对，就把访问过的元素和下标加入到map中
+        return []
+'''
+
 
 '''
 # 登录 AlgoMooc 官网获取更多算法图解

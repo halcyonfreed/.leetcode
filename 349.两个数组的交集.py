@@ -7,30 +7,98 @@
 # @lc code=start
 class Solution:
     def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:
-        nums1.sort()
-        nums2.sort()
+        # nums1.sort()
+        # nums2.sort()
 
-        length1,length2=len(nums1),len(nums2)
+        # length1,length2=len(nums1),len(nums2)
 
-        res=list()
-        index,index1,index2=0,0,0 #三指针，两个list，返回的list
+        # res=list()
+        # index,index1,index2=0,0,0 #三指针，两个list，返回的list
 
-        while index1<length1 and index2<length2:
-            num1=nums1[index1]
-            num2=nums2[index2]
+        # while index1<length1 and index2<length2:
+        #     num1=nums1[index1]
+        #     num2=nums2[index2]
 
-            if num1==num2:
-                # 不是头，也不和上一个元素重复
-                if not res or num1!=res[-1]:
-                    res.append(num1)
+        #     if num1==num2:
+        #         # 不是头，也不和上一个元素重复
+        #         if not res or num1!=res[-1]:
+        #             res.append(num1)
             
-                index1+=1
-                index2+=1
-            elif num1<num2:
-                index1+=1
-            else:
-                index2+=1
-        return res
+        #         index1+=1
+        #         index2+=1
+        #     elif num1<num2:
+        #         index1+=1
+        #     else:
+        #         index2+=1
+        # return res
+        # result=set()
+
+        # table={}
+        # for num in nums1:
+        #     table[num]=table.get(num,0)+1 # 如果num不在，返回0，在就返回num对应的value值。{} dict.get(key -- 字典中要查找的键, value -- 可选，如果指定键的值不存在时，返回该默认值。)
+        
+        # for num in nums2:
+        #     if num in table:
+        #         result.add(num)
+        #         # del table[num] 可以不加，这个是为了节省空间。 del table也不行
+        # return list(result)
+
+#        # hash set
+        # result=set() # 去重
+        # hashtable={}
+        # for num in nums1:
+        #     hashtable[num]=hashtable.get(num,0)+1
+        
+        # for num in nums2:
+        #     if num in hashtable:
+        #         result.add(num)
+        # return list(result)
+
+        # # hash数组：太妙了，每个位置相乘
+        # 因为最长是1000
+        cnt1,cnt2=[0]*1001,[0]*1001
+        result=[] # result长度未知！！！！
+        for i in range(len(nums1)):
+            cnt1[nums1[i]]+=1 # 不是 cnt[i]啊，nums[i]可能很分散！！！
+        for i in range(len(nums2)):
+            cnt2[nums2[i]]+=1
+        for i in range(1001):
+            if cnt1[i]*cnt2[i]!=0:
+                result.append(i)
+        return result
+
+'''
+class Solution:
+    def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:
+    # 使用哈希表存储一个数组中的所有元素
+        table = {}
+        for num in nums1:
+            table[num] = table.get(num, 0) + 1 
+        
+        # 使用集合存储结果
+        res = set()
+        for num in nums2:
+            if num in table:
+                res.add(num)
+                del table[num]
+        
+        return list(res)
+
+
+    # 法二 hash 数组
+        count1 = [0]*1001
+        count2 = [0]*1001
+        result = []
+        for i in range(len(nums1)):
+            count1[nums1[i]]+=1
+        for j in range(len(nums2)):
+            count2[nums2[j]]+=1
+        for k in range(1001):
+            if count1[k]*count2[k]>0:
+                result.append(k)
+        return result
+	
+'''        
 '''
 class Solution:
     def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:

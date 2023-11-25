@@ -12,15 +12,59 @@
 #         self.next = next
 class Solution:
     def swapPairs(self,head:ListNode)->ListNode:
-        if head==None or head.next==None:
+        # dummyhead=ListNode(next=head)
+        # cur=dummyhead
+
+        # while cur.next and cur.next.next:
+        #     tmp1=cur.next
+        #     tmp2=cur.next.next.next
+
+        #     cur.next=cur.next.next
+        #     cur.next.next=tmp1
+        #     tmp1.next=tmp2
+
+        #     cur=cur.next.next
+        # return dummyhead.next
+
+        if head is None or head.next is None:
             return head
-        subHead=self.swapPairs(head.next.next) # recursion递归，套娃
+        pre=head
+        cur=head.next
+        next=head.next.next # 新的头，两个两个操作
+        
+        cur.next=pre
+        pre.next=self.swapPairs(next)
 
-        headNext=head.next
-        headNext.next=head
-        head.next=subHead
-        return headNext
+        return cur # 新的头
 
+
+
+'''
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+
+class Solution:
+    def swapPairs(self, head: ListNode) -> ListNode:
+        dummy_head = ListNode(next=head)
+        current = dummy_head
+        
+        # 必须有cur的下一个和下下个才能交换，否则说明已经交换结束了
+        while current.next and current.next.next:
+            temp = current.next # 防止节点修改
+            temp1 = current.next.next.next
+            
+            current.next = current.next.next
+            current.next.next = temp
+            temp.next = temp1
+            current = current.next.next
+        return dummy_head.next
+
+        
+
+'''
 '''
 class Solution:
     def swapPairs(self, head: ListNode) -> ListNode:

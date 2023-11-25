@@ -1,4 +1,4 @@
-#
+
 # @lc app=leetcode.cn id=206 lang=python3
 #
 # [206] 反转链表
@@ -12,14 +12,47 @@
 #         self.next = next
 class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        if head==None or head.next==None:
-            return head
-        cur=self.reverseList(head.next) # 新的头
-        
-        # 翻过来，尾巴放到头这里！！
-        head.next.next=head # 尾的下一个指头
-        head.next=None # 原来的头变尾巴
-        return cur
+      # cur=head
+      # pre=None
+      # while cur:
+      #      tmp=cur.next
+      #      cur.next=pre
+      #      # 移动
+      #      pre=cur
+      #      cur=tmp
+      # return pre #因为cur走到了NULL，cur==NULL才停下来，所以此时pre是新头
+      return self.reverse(head,None)
+    def reverse(self,cur:Optional[ListNode],pre: Optional[ListNode]) ->Optional[ListNode]:
+      if cur==None:
+          return pre # 最终返回的 是pre！！！
+      temp=cur.next
+      cur.next=pre
+      
+      return self.reverse(temp,cur) # 往后移动，一直套娃！！！
+         
+
+
+
+'''
+（版本一）双指针法
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reverseList(self, head: ListNode) -> ListNode:
+        cur = head   
+        pre = None
+        while cur:
+            temp = cur.next # 保存一下 cur的下一个节点，因为接下来要改变cur->next
+            cur.next = pre #反转
+            #更新pre、cur指针
+            pre = cur
+            cur = temp
+        return pre
+'''
+
 
 '''
 #  登录 AlgoMooc 官网获取更多算法图解

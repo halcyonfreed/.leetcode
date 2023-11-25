@@ -12,20 +12,31 @@
 #         self.next = next
 class Solution:
     def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
-        dummy=ListNode(-1)
-        dummy.next=head
+        # # 可以直接自己默出来
+        # dummyhead=ListNode(next=head)
+        # slow=fast=dummyhead  #可以连等
 
-        cur,latter,former=head,dummy,head
-        for i in range(n):
-            former=former.next
-
-        while former!=None:
-            former=former.next
-            latter=cur
-            cur=cur.next
+        # for i in range(n+1):
+        #     fast=fast.next
+        # while fast:
+        #     slow=slow.next
+        #     fast=fast.next
         
-        latter.next=cur.next
-        return dummy.next
+        # # 删除
+        # slow.next=slow.next.next
+
+        # return dummyhead.next
+        dummyhead=ListNode(next=head)
+        slow=fast=dummyhead
+
+        for i in range(n+1):
+            fast=fast.next
+        while fast:
+            fast=fast.next
+            slow=slow.next
+        slow.next=slow.next.next
+        return dummyhead.next
+
 
 '''
 # 本题文字版详解请访问下方网站

@@ -13,23 +13,34 @@
 
 class Solution:
     def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        # 1. 有环吗
-        slow=head
-        fast=head
-        while fast!=None and fast.next!=None:
+        # slow=fast=head
+        # while fast and fast.next:
+        #     slow=slow.next
+        #     fast=fast.next.next
+        #     if slow==fast:
+        #         slow=head # fast别动！！
+
+        #         # 然后slow走x，fast走z=x，它们的第一次相遇就是入口了，return slow
+        #         while slow!=fast:
+        #             slow=slow.next
+        #             fast=fast.next
+        #         return slow
+            
+        # return None
+        slow=fast=head
+        while fast and fast.next:
             slow=slow.next
             fast=fast.next.next
+            if fast==slow:
+                slow=head
 
-            if slow==fast:
-                # 有环，就开始找入口
-                b=fast # 相遇的地方
-                a=head
-                while a!=b:
-                    a=a.next
-                    b=b.next
-                return a
-            
+                while slow!=fast:
+                    slow=slow.next
+                    fast=fast.next
+                return slow
         return None
+
+
 
                 
 

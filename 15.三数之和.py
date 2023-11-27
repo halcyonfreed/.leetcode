@@ -7,42 +7,114 @@
 # @lc code=start
 class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
-        ans=[]
-        if nums==None or len(nums)<3:
-            return ans
+        result=[]
         nums.sort()
 
         for i in range(len(nums)):
-            if nums[i]>0:
-                break # 没救了
-
+            if nums[i]>0: return result
+            # 找a去重
             if i>0 and nums[i]==nums[i-1]:
-                continue #重复
+                continue
 
+            # 找b,c
             left=i+1
-            right=len(nums)-1 # 每次刷新初始位置
+            right=len(nums)-1
 
-            while left<right:
-                sum=nums[i]+nums[left]+nums[right]
-                if sum==0:
-                    # 找区间里所有的
-                    ans.append([nums[i],nums[left],nums[right]])
+            while right>left:
+                sum_=nums[i]+nums[left]+nums[right]
 
-                    while left<right and nums[left]==nums[left+1]:
-                        # 可能left>right
-                        left+=1
-                    while left <right and nums[right]==nums[right-1]:
-                        right-=1
-                    left +=1
-                    right-=1
-
-                elif sum<0:
+                if sum_<0:
                     left+=1
-                elif sum>0:
+                elif sum_>0:
                     right-=1
-        return ans
+                else:
+                    result.append([nums[i],nums[left],nums[right]])
 
+                    # b,c去重
+                    while right>left and nums[right]==nums[right-1]: # 这里right>left漏
+                        right-=1
+                    while right>left and nums[left]==nums[left+1]:
+                        left+=1
+                    left+=1
+                    right-=1
+        return result
 
+    
+
+        # ans=[]
+        # if nums==None or len(nums)<3:
+        #     return ans
+        # nums.sort()
+
+        # for i in range(len(nums)):
+        #     if nums[i]>0:
+        #         break # 没救了
+
+        #     if i>0 and nums[i]==nums[i-1]:
+        #         continue #重复
+
+        #     left=i+1
+        #     right=len(nums)-1 # 每次刷新初始位置
+
+        #     while left<right:
+        #         sum=nums[i]+nums[left]+nums[right]
+        #         if sum==0:
+        #             # 找区间里所有的
+        #             ans.append([nums[i],nums[left],nums[right]])
+
+        #             while left<right and nums[left]==nums[left+1]:
+        #                 # 可能left>right
+        #                 left+=1
+        #             while left <right and nums[right]==nums[right-1]:
+        #                 right-=1
+        #             left +=1
+        #             right-=1
+
+        #         elif sum<0:
+        #             left+=1
+        #         elif sum>0:
+        #             right-=1
+        # return ans
+
+'''
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        result = []
+        nums.sort()
+        
+        for i in range(len(nums)):
+            # 如果第一个元素已经大于0，不需要进一步检查
+            if nums[i] > 0:
+                return result
+            
+            # 跳过相同的元素以避免重复
+            if i > 0 and nums[i] == nums[i - 1]:
+                continue
+                
+            left = i + 1
+            right = len(nums) - 1
+            
+            while right > left:
+                sum_ = nums[i] + nums[left] + nums[right]
+                
+                if sum_ < 0:
+                    left += 1
+                elif sum_ > 0:
+                    right -= 1
+                else:
+                    result.append([nums[i], nums[left], nums[right]])
+                    
+                    # 跳过相同的元素以避免重复
+                    while right > left and nums[right] == nums[right - 1]:
+                        right -= 1
+                    while right > left and nums[left] == nums[left + 1]:
+                        left += 1
+                        
+                    right -= 1
+                    left += 1
+                    
+        return result
+'''
 '''
 # 登录 AlgoMooc 官网获取更多算法图解
 # https://www.algomooc.com

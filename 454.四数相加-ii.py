@@ -19,11 +19,12 @@ class Solution:
         for n3 in nums3:
             for n4 in nums4:
                 key=-n3-n4
-                value=hashmap[key]
+                
 
                 if key in hashmap:
+                    value=hashmap[key]
                     result+=value # 这里不是+=1啊！！！！知道不小朋友
-                    
+        return result
 '''
 class Solution(object):
     def fourSumCount(self, nums1, nums2, nums3, nums4):

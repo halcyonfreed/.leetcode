@@ -19,7 +19,8 @@ class Solution:
             if record[i]!=0:
                 return False
         return True
-
+        # print(record)
+        # return not all(record[i] for i in range(26)) # 这种写法不对！！
 
         # if len(s)!=len(t):
         #     return False
